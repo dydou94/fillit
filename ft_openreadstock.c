@@ -6,7 +6,7 @@
 /*   By: dyuzan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/05 09:05:38 by dyuzan            #+#    #+#             */
-/*   Updated: 2016/01/11 14:57:43 by dyuzan           ###   ########.fr       */
+/*   Updated: 2016/01/13 12:52:25 by dyuzan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,18 @@ char	*ft_stock(char *tetriminos)
 	return (buf);
 }
 
-void	ft_check(char *check)
+int		ft_check(char *check)
 {
 	while (*check)
 	{
 		if (*check != '.' &&  *check != '#' && *check != '\n')
 		{
 		ft_putstr("INVALIDE TETRIMINOS");
-		break;
+		return (0);
 		}
 		check++;
 	}
+	return (1);
 }
 
 void	ft_check2(char *check)
@@ -60,11 +61,13 @@ void	ft_check2(char *check)
 	int i = 0;
 	int dz_line = 0;
 
+	if(!ft_check(check))
+		return ;
 	while (*check)
 	{
 		if (*check == '\n' || *check == '#')
 		dz_line++;
-		if (i != 21 && dz_line != 9)
+		if (i == 21 && dz_line != 9)
 		{
 			ft_putstr("INVALIDE TETRIMINOS");
 			break;
